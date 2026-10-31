@@ -1,5 +1,26 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { seeded } from '../data/content.js'
+
+// A course photo dropped into public/images/courses/<slug>.jpg|.png|.webp is shown automatically;
+// until then (or if it fails to load) the generated artwork below is used.
+const EXTENSIONS = ['jpg', 'png', 'webp']
+
+function CoursePhoto({ slug }) {
+  const [attempt, setAttempt] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+  if (attempt >= EXTENSIONS.length) return null
+  return (
+    <img
+      src={`/images/courses/${slug}.${EXTENSIONS[attempt]}`}
+      alt=""
+      loading="lazy"
+      decoding="async"
+      onLoad={() => setLoaded(true)}
+      onError={() => { setLoaded(false); setAttempt((n) => n + 1) }}
+      className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${loaded ? 'opacity-100' : 'opacity-0'}`}
+    />
+  )
+}
 
 // Generative course artwork: gradient field + seeded candlestick silhouette (colours from courses.thumbnail)
 export default function CourseThumb({ course, className = 'h-40' }) {
@@ -46,6 +67,7 @@ export default function CourseThumb({ course, className = 'h-40' }) {
         })}
         <path d={path} fill="none" stroke="white" strokeOpacity="0.5" strokeWidth="0.8" />
       </svg>
+      {course.slug && <CoursePhoto key={course.slug} slug={course.slug} />}
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/40 to-transparent" />
     </div>
   )
