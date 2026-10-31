@@ -1,4 +1,5 @@
 // Login sessions: a signed JWT (HS256) stored in an httpOnly cookie.
+import { createHmac } from 'node:crypto'
 import { SignJWT, jwtVerify } from 'jose'
 import { db } from './db.js'
 import { HttpError, parseCookies } from './http.js'
@@ -6,10 +7,18 @@ import { HttpError, parseCookies } from './http.js'
 const COOKIE = 've_session'
 const MAX_AGE = 60 * 60 * 24 * 7 // 7 days
 
+let derived
 function secret() {
   const s = process.env.JWT_SECRET
-  if (!s) throw new HttpError(500, 'JWT_SECRET is not set on the server.')
-  return new TextEncoder().encode(s)
+  if (s) return new TextEncoder().encode(s)
+  // Fallback when JWT_SECRET isn't configured: a key derived from the (secret) database credentials,
+  // so login still works after a one-variable deploy. Setting JWT_SECRET is still recommended.
+  if (!process.env.DATABASE_URL) throw new HttpError(500, 'JWT_SECRET is not set on the server.')
+  if (!derived) {
+    console.warn('[auth] JWT_SECRET not set; using a key derived from DATABASE_URL')
+    derived = createHmac('sha256', 'vaultedge-session-key').update(process.env.DATABASE_URL).digest()
+  }
+  return derived
 }
 
 function cookie(value, maxAge) {

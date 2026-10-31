@@ -18,6 +18,7 @@ import bookSession from '../_routes/sessions/[id]/book.js'
 import sessions from '../_routes/sessions/index.js'
 import stats from '../_routes/stats.js'
 import risk from '../_routes/tools/risk.js'
+import { ensureDatabase } from './setup.js'
 
 // Same paths as before; fixed paths are listed before ":param" ones that could also match.
 const table = [
@@ -61,6 +62,13 @@ export default async function dispatch(req, res) {
   const pathname = rewritten !== null ? `/api/${rewritten}` : url.pathname
   const found = match(pathname.replace(/\/+$/, '') || '/')
   if (!found) return res.status(404).json({ error: 'Not found' })
+  try {
+    await ensureDatabase()
+  } catch (err) {
+    console.error('[setup] database setup failed:', err.message)
+    res.setHeader('Cache-Control', 'no-store')
+    return res.status(503).json({ error: 'We can’t reach the database right now. Please try again in a moment.', code: 'DB_UNAVAILABLE' })
+  }
   // Handlers read query-string values and path params (e.g. :slug, :id) from req.query.
   const query = { ...Object.fromEntries(url.searchParams), ...found.params }
   try { req.query = query } catch { Object.assign(req.query, query) }
