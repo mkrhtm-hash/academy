@@ -62,7 +62,7 @@ export async function requireUserId(req) {
 export async function loadUser(userId) {
   const sql = db()
   const [u] = await sql`
-    SELECT u.id, u.email, u.full_name, u.experience_level, u.created_at, p.id AS plan_id, p.name AS plan_name
+    SELECT u.id, u.email, u.full_name, u.experience_level, u.created_at, u.is_admin, p.id AS plan_id, p.name AS plan_name
     FROM users u JOIN plans p ON p.id = u.plan_id
     WHERE u.id = ${userId}`
   return u ? publicUser(u) : null
@@ -75,8 +75,17 @@ export function publicUser(u) {
     full_name: u.full_name,
     experience_level: u.experience_level,
     created_at: u.created_at,
+    is_admin: !!u.is_admin,
     plan: { id: u.plan_id, name: u.plan_name },
   }
+}
+
+/** The logged-in user if they are an admin; otherwise 401/403. Checked on every admin API call. */
+export async function requireAdmin(req) {
+  const user = await loadUser(await requireUserId(req))
+  if (!user) throw new HttpError(401, 'Please log in to continue.', 'UNAUTHENTICATED')
+  if (!user.is_admin) throw new HttpError(403, 'Admins only.', 'FORBIDDEN')
+  return user
 }
 
 /** Free-plan users get free courses plus preview lessons; Pro and Elite unlock everything. */

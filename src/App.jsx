@@ -19,6 +19,7 @@ const Achievements = lazy(() => import('./pages/Achievements.jsx'))
 const Profile = lazy(() => import('./pages/Profile.jsx'))
 const Pricing = lazy(() => import('./pages/Pricing.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
+const Admin = lazy(() => import('./pages/Admin.jsx'))
 
 const auth = (el) => <RequireAuth>{el}</RequireAuth>
 
@@ -43,6 +44,7 @@ export default function App() {
             <Route path="/live" element={auth(<LiveSessions />)} />
             <Route path="/achievements" element={auth(<Achievements />)} />
             <Route path="/profile" element={auth(<Profile />)} />
+            <Route path="/admin" element={auth(<Admin />)} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

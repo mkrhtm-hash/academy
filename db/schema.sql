@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS users (
   created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE INDEX IF NOT EXISTS users_plan_idx ON users(plan_id);
+-- Admins can open /admin (manage students, sessions, view orders and stats).
+ALTER TABLE users ADD COLUMN IF NOT EXISTS is_admin BOOLEAN NOT NULL DEFAULT FALSE;
 
 CREATE TABLE IF NOT EXISTS courses (
   id                SERIAL PRIMARY KEY,

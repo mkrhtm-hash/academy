@@ -1,6 +1,10 @@
 // All API routes, served by ONE function (api/[...path].js) so the app fits Vercel's Hobby-plan
 // limit of 12 functions. Route handlers live in api/_routes/ (folders starting with "_" are not
 // turned into functions by Vercel). Static imports so Vercel bundles every route.
+import admin from '../_routes/admin/index.js'
+import adminSessionById from '../_routes/admin/sessions/[id].js'
+import adminSessions from '../_routes/admin/sessions/index.js'
+import adminUserById from '../_routes/admin/users/[id].js'
 import login from '../_routes/auth/login.js'
 import logout from '../_routes/auth/logout.js'
 import me from '../_routes/auth/me.js'
@@ -22,6 +26,10 @@ import { ensureDatabase } from './setup.js'
 
 // Same paths as before; fixed paths are listed before ":param" ones that could also match.
 const table = [
+  ['/api/admin', admin],
+  ['/api/admin/sessions', adminSessions],
+  ['/api/admin/sessions/:id', adminSessionById],
+  ['/api/admin/users/:id', adminUserById],
   ['/api/auth/login', login],
   ['/api/auth/logout', logout],
   ['/api/auth/me', me],

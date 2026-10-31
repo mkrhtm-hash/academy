@@ -29,7 +29,9 @@ async function check() {
   if (!url || ['localhost', '127.0.0.1'].includes(new URL(url).hostname)) return // local: npm run db:setup / local-db.js
   const [state] = await db()`
     SELECT to_regclass('public.demo_orders') IS NOT NULL
-       AND (SELECT count(*) FROM information_schema.columns WHERE table_name = 'instruments' AND column_name = 'ref_checked_at') > 0 AS schema_ok`
+       AND (SELECT count(*) FROM information_schema.columns
+            WHERE (table_name = 'instruments' AND column_name = 'ref_checked_at')
+               OR (table_name = 'users' AND column_name = 'is_admin')) = 2 AS schema_ok`
   if (!state.schema_ok) {
     console.log('[setup] creating tables and loading sample data…')
     await runSql(['schema.sql', 'seed.sql'])

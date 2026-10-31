@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Award, BookOpen, CandlestickChart, Crown, DatabaseZap, Flame, Gem, GraduationCap, LayoutDashboard, LogIn, LogOut, Menu, Moon, Radio, Sun, User, Wrench, X,
+  Award, BookOpen, CandlestickChart, Crown, DatabaseZap, Flame, Gem, GraduationCap, LayoutDashboard, LogIn, LogOut, Menu, Moon, Radio, ShieldCheck, Sun, User, Wrench, X,
 } from 'lucide-react'
 import { Suspense, useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
@@ -20,6 +20,8 @@ export const NAV = [
   { to: '/profile', label: 'Profile', icon: User },
   { to: '/pricing', label: 'Pricing', icon: Gem },
 ]
+const ADMIN_NAV = { to: '/admin', label: 'Admin', icon: ShieldCheck }
+const navFor = (user) => (user?.is_admin ? [...NAV, ADMIN_NAV] : NAV)
 
 export function ThemeToggle() {
   const { state, toggleTheme } = useApp()
@@ -89,7 +91,7 @@ function Sidebar() {
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-line bg-panel/70 px-4 py-6 backdrop-blur-xl lg:flex">
       <div className="px-2"><Logo /></div>
       <nav className="mt-10 flex-1 space-y-1">
-        {NAV.map(({ to, label, icon: Icon }) => (
+        {navFor(user).map(({ to, label, icon: Icon }) => (
           <NavLink key={to} to={to} className={({ isActive }) => `group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${isActive ? 'text-ink' : 'text-muted hover:bg-soft hover:text-ink'}`}>
             {({ isActive }) => (
               <>
@@ -150,12 +152,13 @@ function Topbar() {
 }
 
 function BottomNav() {
+  const { user } = useApp()
   const [more, setMore] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
   useEffect(() => setMore(false), [location.pathname])
   const main = NAV.slice(0, 4).map((n) => (n.to === '/tools' ? NAV[4] : n)) // Dashboard, Courses, Simulator, Live
-  const rest = NAV.filter((n) => !main.includes(n))
+  const rest = navFor(user).filter((n) => !main.includes(n))
   const restActive = rest.some((n) => location.pathname.startsWith(n.to))
 
   return (
