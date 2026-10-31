@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { seeded } from '../data/content.js'
 
-// A course photo dropped into public/images/courses/<slug>.jpg|.png|.webp is shown automatically;
+// A course photo dropped into public/images/courses/<slug>.jpg|.png|.webp|.svg is shown automatically;
 // until then (or if it fails to load) the generated artwork below is used.
-const EXTENSIONS = ['jpg', 'png', 'webp']
+const EXTENSIONS = ['jpg', 'png', 'webp', 'svg']
 
 function CoursePhoto({ slug }) {
   const [attempt, setAttempt] = useState(0)
