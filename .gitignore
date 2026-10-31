@@ -6,3 +6,7 @@ dist
 .vercel
 .localdb
 *.log
+
+.vercel
+.env*
+!.env.example
