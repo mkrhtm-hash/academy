@@ -1,8 +1,8 @@
-import { loadUser, requireUserId, sessionUserId } from '../_lib/auth.js'
-import { pct } from '../_lib/courses.js'
-import { db } from '../_lib/db.js'
-import { HttpError, body, idParam, route } from '../_lib/http.js'
-import { activityFor, lessonAccess, logActivity, maybeIssueCertificate } from '../_lib/learning.js'
+import { loadUser, requireUserId, sessionUserId } from '../../_lib/auth.js'
+import { pct } from '../../_lib/courses.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, body, idParam, route } from '../../_lib/http.js'
+import { activityFor, lessonAccess, logActivity, maybeIssueCertificate } from '../../_lib/learning.js'
 
 async function findLesson(id) {
   const [row] = await db()`

@@ -1,7 +1,7 @@
-import { requireUserId } from '../_lib/auth.js'
-import { db } from '../_lib/db.js'
-import { route } from '../_lib/http.js'
-import { START_BALANCE, accountSummary, tick } from '../_lib/market.js'
+import { requireUserId } from '../../_lib/auth.js'
+import { db } from '../../_lib/db.js'
+import { route } from '../../_lib/http.js'
+import { START_BALANCE, accountSummary, tick } from '../../_lib/market.js'
 
 // Reset the practice account: remove all positions and restore the $10,000 virtual balance.
 export default route({

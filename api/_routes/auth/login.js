@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
-import { loadUser, startSession } from '../_lib/auth.js'
-import { db } from '../_lib/db.js'
-import { HttpError, body, route } from '../_lib/http.js'
+import { loadUser, startSession } from '../../_lib/auth.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, body, route } from '../../_lib/http.js'
 
 // Compared against when the email doesn't exist, so response time doesn't reveal which emails are registered.
 const DUMMY_HASH = '$2b$10$CwTycUXWue0Thq9StjUM0uJ8.6Tq5bQZ1hDlA0a9iVvJpG5Qy3Z1e'

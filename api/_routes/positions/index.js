@@ -1,8 +1,8 @@
-import { requireUserId } from '../_lib/auth.js'
-import { db, money } from '../_lib/db.js'
-import { HttpError, body, route } from '../_lib/http.js'
-import { logActivity } from '../_lib/learning.js'
-import { MAX_LOTS, MIN_LOTS, accountSummary, marginUsd, quote, tick } from '../_lib/market.js'
+import { requireUserId } from '../../_lib/auth.js'
+import { db, money } from '../../_lib/db.js'
+import { HttpError, body, route } from '../../_lib/http.js'
+import { logActivity } from '../../_lib/learning.js'
+import { MAX_LOTS, MIN_LOTS, accountSummary, marginUsd, quote, tick } from '../../_lib/market.js'
 
 export default route({
   // The user's practice account, open positions (with live floating P&L) and trade history.

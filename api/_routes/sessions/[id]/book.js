@@ -1,7 +1,7 @@
-import { requireUserId } from '../../_lib/auth.js'
-import { db } from '../../_lib/db.js'
-import { HttpError, idParam, route } from '../../_lib/http.js'
-import { sessionJson } from '../../_lib/sessions.js'
+import { requireUserId } from '../../../_lib/auth.js'
+import { db } from '../../../_lib/db.js'
+import { HttpError, idParam, route } from '../../../_lib/http.js'
+import { sessionJson } from '../../../_lib/sessions.js'
 
 async function load(userId, id) {
   const [s] = await db()`

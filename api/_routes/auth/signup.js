@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
-import { loadUser, startSession } from '../_lib/auth.js'
-import { db } from '../_lib/db.js'
-import { HttpError, body, route } from '../_lib/http.js'
+import { loadUser, startSession } from '../../_lib/auth.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, body, route } from '../../_lib/http.js'
 
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced']
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/

@@ -1,7 +1,7 @@
-import { requireUserId } from '../_lib/auth.js'
-import { db } from '../_lib/db.js'
-import { route } from '../_lib/http.js'
-import { sessionJson } from '../_lib/sessions.js'
+import { requireUserId } from '../../_lib/auth.js'
+import { db } from '../../_lib/db.js'
+import { route } from '../../_lib/http.js'
+import { sessionJson } from '../../_lib/sessions.js'
 
 // This week's live sessions (now → 7 days ahead) with spots left and the user's own bookings.
 export default route({

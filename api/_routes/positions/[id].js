@@ -1,7 +1,7 @@
-import { requireUserId } from '../_lib/auth.js'
-import { db } from '../_lib/db.js'
-import { HttpError, idParam, route } from '../_lib/http.js'
-import { accountSummary, closePosition, exitPrice, tick } from '../_lib/market.js'
+import { requireUserId } from '../../_lib/auth.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, idParam, route } from '../../_lib/http.js'
+import { accountSummary, closePosition, exitPrice, tick } from '../../_lib/market.js'
 
 // Close one of the logged-in user's open positions at the server's current price.
 export default route({

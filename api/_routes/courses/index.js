@@ -1,6 +1,6 @@
-import { sessionUserId } from '../_lib/auth.js'
-import { CATEGORIES, LEVELS, courseRows, publicCourse } from '../_lib/courses.js'
-import { route } from '../_lib/http.js'
+import { sessionUserId } from '../../_lib/auth.js'
+import { CATEGORIES, LEVELS, courseRows, publicCourse } from '../../_lib/courses.js'
+import { route } from '../../_lib/http.js'
 
 // Public: the catalog is visible to everyone. Progress is included when logged in.
 export default route({

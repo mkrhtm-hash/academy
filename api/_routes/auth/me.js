@@ -1,7 +1,7 @@
-import { endSession, loadUser, requireUserId, sessionUserId } from '../_lib/auth.js'
-import { db } from '../_lib/db.js'
-import { HttpError, body, route } from '../_lib/http.js'
-import { activityFor } from '../_lib/learning.js'
+import { endSession, loadUser, requireUserId, sessionUserId } from '../../_lib/auth.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, body, route } from '../../_lib/http.js'
+import { activityFor } from '../../_lib/learning.js'
 
 const LEVELS = ['Beginner', 'Intermediate', 'Advanced']
 

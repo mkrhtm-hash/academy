@@ -1,5 +1,5 @@
-import { db } from './_lib/db.js'
-import { route } from './_lib/http.js'
+import { db } from '../_lib/db.js'
+import { route } from '../_lib/http.js'
 
 // Public landing-page counters, straight from the database.
 export default route({

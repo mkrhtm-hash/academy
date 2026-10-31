@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto'
-import { loadUser, requireUserId, sessionUserId } from './_lib/auth.js'
-import { db, num } from './_lib/db.js'
-import { HttpError, body, route } from './_lib/http.js'
+import { loadUser, requireUserId, sessionUserId } from '../_lib/auth.js'
+import { db, num } from '../_lib/db.js'
+import { HttpError, body, route } from '../_lib/http.js'
 
 // Yearly billing is 20% off, charged as 12 discounted months. Calculated here, never trusted from the browser.
 const yearlyMonthly = (monthly) => Math.round(monthly * 0.8)

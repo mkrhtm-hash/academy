@@ -1,6 +1,6 @@
-import { db, num } from './_lib/db.js'
-import { HttpError, route } from './_lib/http.js'
-import { publicInstrument, tick } from './_lib/market.js'
+import { db, num } from '../_lib/db.js'
+import { HttpError, route } from '../_lib/http.js'
+import { publicInstrument, tick } from '../_lib/market.js'
 
 export const CANDLE_SECONDS = 15
 

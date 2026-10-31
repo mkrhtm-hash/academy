@@ -1,10 +1,10 @@
-import { loadUser, requireUserId } from './_lib/auth.js'
-import { courseRows, publicCourse } from './_lib/courses.js'
-import { db } from './_lib/db.js'
-import { HttpError, route } from './_lib/http.js'
-import { activityFor } from './_lib/learning.js'
-import { accountSummary, tick } from './_lib/market.js'
-import { sessionJson } from './_lib/sessions.js'
+import { loadUser, requireUserId } from '../_lib/auth.js'
+import { courseRows, publicCourse } from '../_lib/courses.js'
+import { db } from '../_lib/db.js'
+import { HttpError, route } from '../_lib/http.js'
+import { activityFor } from '../_lib/learning.js'
+import { accountSummary, tick } from '../_lib/market.js'
+import { sessionJson } from '../_lib/sessions.js'
 
 // Everything the Dashboard (and Achievements/Profile) need, for the logged-in user only.
 export default route({

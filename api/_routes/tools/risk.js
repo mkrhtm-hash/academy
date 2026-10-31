@@ -1,6 +1,6 @@
-import { db } from '../_lib/db.js'
-import { HttpError, route } from '../_lib/http.js'
-import { MAX_LOTS, pipValueUsd, quote } from '../_lib/market.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, route } from '../../_lib/http.js'
+import { MAX_LOTS, pipValueUsd, quote } from '../../_lib/market.js'
 
 // Position-size calculator: account size × risk % ÷ (stop distance × pip value per lot),
 // using each instrument's pip size and contract size from the database.

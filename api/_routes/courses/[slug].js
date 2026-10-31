@@ -1,8 +1,8 @@
-import { hasFullLibrary, loadUser, sessionUserId } from '../_lib/auth.js'
-import { courseRows, publicCourse } from '../_lib/courses.js'
-import { db } from '../_lib/db.js'
-import { HttpError, route } from '../_lib/http.js'
-import { isPreview, lessonAccess } from '../_lib/learning.js'
+import { hasFullLibrary, loadUser, sessionUserId } from '../../_lib/auth.js'
+import { courseRows, publicCourse } from '../../_lib/courses.js'
+import { db } from '../../_lib/db.js'
+import { HttpError, route } from '../../_lib/http.js'
+import { isPreview, lessonAccess } from '../../_lib/learning.js'
 
 // Public course page: modules and lesson titles for everyone; ticks and locks per user.
 export default route({
