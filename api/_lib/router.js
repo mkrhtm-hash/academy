@@ -55,7 +55,11 @@ function match(pathname) {
 /** (req, res) handler for every /api/* request, on Vercel and in the local dev server. */
 export default async function dispatch(req, res) {
   const url = new URL(req.url, 'http://localhost')
-  const found = match(url.pathname.replace(/\/+$/, '') || '/')
+  // On Vercel, vercel.json rewrites /api/<path> to /api/handler?__path=<path>; locally the URL is untouched.
+  const rewritten = url.searchParams.get('__path')
+  url.searchParams.delete('__path')
+  const pathname = rewritten !== null ? `/api/${rewritten}` : url.pathname
+  const found = match(pathname.replace(/\/+$/, '') || '/')
   if (!found) return res.status(404).json({ error: 'Not found' })
   // Handlers read query-string values and path params (e.g. :slug, :id) from req.query.
   const query = { ...Object.fromEntries(url.searchParams), ...found.params }

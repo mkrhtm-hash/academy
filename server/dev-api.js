@@ -1,7 +1,7 @@
-// Local stand-in for Vercel. It serves the exact same function Vercel deploys (api/[...path].js,
+// Local stand-in for Vercel. It serves the exact same function Vercel deploys (api/handler.js,
 // which routes to api/_routes/*), so nothing changes at deploy time. Vite proxies /api here.
 import express from 'express'
-import handler from '../api/[...path].js'
+import handler from '../api/handler.js'
 import { routeCount } from '../api/_lib/router.js'
 
 const PORT = Number(process.env.API_PORT) || 3001
